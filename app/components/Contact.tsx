@@ -1,14 +1,9 @@
 import Image from "next/image";
 import logo from "../../public/Assets/image/image.png";
-import background from "../../public/Assets/mencoba.png";
 
 export default function Contact() {
   return (
-    <section
-      id="contact"
-      className="lg:px-28 md:px-10 px-4 lg:bg-center lg:bg-no-repeat xl:bg-[length:100%_100%] min-h-screen flex justify-center items-center md:rounded-bl-[150px] rounded-bl-4xl"
-      style={{ backgroundImage: `url(${background.src})` }}
-    >
+    <section id="contact" className="lg:px-28 md:px-10 px-4 lg:bg-center lg:bg-no-repeat xl:bg-[length:100%_100%] pt-14 md:pt-16 lg:pt-20 xl:pt-28 flex justify-center items-center md:rounded-bl-[150px] rounded-bl-4xl">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-yellow-300 text-2xl mb-4">Contact Us</h1>
         <p className="text-white text-justify max-w-3xl leading-relaxed mb-10">

@@ -5,8 +5,8 @@ import logo3 from "../../public/—Pngtree—twitter white icon_3570409.png";
 import logo4 from "../../public/—Pngtree—white whatsapp icon png_3562063.png";
 export default function Footer() {
   return (
-    <footer className="mt-10 max-w-7xl mx-auto px-3">
-      <div className="flex justify-between items-center">
+    <footer className="mt-10  px-3 bg-[#E6E6E6] pt-4">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="">
           <h1 className="text-[#333333]">Kotaki @2025</h1>
         </div>

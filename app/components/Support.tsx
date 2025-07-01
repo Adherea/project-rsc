@@ -1,15 +1,14 @@
 import Image from "next/image";
 import logo from "../../public/Assets/image/image.png";
-import background from "../../public/Assets/mencoba.png";
 
 export default function Support() {
   return (
     <>
-      <section id="support" className="lg:px-28 md:px-10 px-4 lg:bg-center lg:bg-no-repeat xl:bg-[length:100%_100%] min-h-screen flex justify-center items-center" style={{ backgroundImage: `url(${background.src})` }}>
+      <section id="support" className="lg:px-28 md:px-10 px-4 lg:bg-center lg:bg-no-repeat xl:bg-[length:100%_100%] pt-14 md:pt-16 lg:pt-20 xl:pt-28 flex justify-center items-center">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-yellow-300 text-2xl  mb-4">Our Support</h1>
 
-          <div className="text-white h-64 overflow-y-auto text-justify space-y-1 md:pr-10 pr-6">
+          <div className="text-white h-64 overflow-y-auto text-justify space-y-1 md:pr-10 pr-6 scrollable">
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. In maiores dolor doloremque quibusdam voluptatum perferendis tenetur. Obcaecati possimus illo odio ipsa, sit debitis at velit quas. Hic, dolorem ea! Dolore aperiam
               aspernatur ullam quo quia maxime illum tempore accusantium facilis repudiandae iure nulla nesciunt modi cupiditate laboriosam repellat quaerat ad illo a voluptatum, quas esse! Veritatis, eum dolorum quaerat magni, corrupti
