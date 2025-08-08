@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -10,109 +9,104 @@ import News from "./components/News";
 import Community from "./components/Community";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import background from "../public/Assets/mencoba.png";
+import background from "../public/Assets/backgroundterbaru.png";
+import background2 from "../public/Assets/backgroundselanjuntya.png";
+import latarSemua from "../public/Assets/latar.jpg";
 
 const sections = [
-  { key: "hero", component: <Hero />, animation: "fade" },
-  { key: "about", component: <About />, animation: "fade" },
-  { key: "support", component: <Support />, animation: "zoom" },
-  { key: "news", component: <News />, animation: "slideRight" },
-  { key: "community", component: <Community />, animation: "slideLeft" },
-  { key: "contact", component: <Contact />, animation: "fade" },
+  { key: "hero", component: <Hero /> },
+  { key: "about", component: <About /> },
+  { key: "community", component: <Community /> },
+  { key: "news", component: <News /> },
+  { key: "support", component: <Support /> },
+  { key: "contact", component: <Contact /> },
 ];
 
 export default function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
-  let lastScrollTime = 0;
+  const [bgImage, setBgImage] = useState(background.src);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Fungsi navigasi dari Navbar
-  const handleNavigate = (key: string) => {
-    const index = sections.findIndex((section) => section.key === key);
-    if (index !== -1) {
-      setActiveIndex(index);
-    }
-  };
-
+  // Cek ukuran layar (responsive)
   useEffect(() => {
-    const handleScroll = (e: WheelEvent) => {
-      const now = Date.now();
+    const checkScreenSize = () => {
+      const isMobile = window.innerWidth < 768;
 
-      // ✅ CEGAH jika scroll berasal dari area scrollable seperti .scrollable
-      const target = e.target as HTMLElement;
-      const isInScrollable = target.closest(".scrollable");
-      if (isInScrollable) return;
-
-      if (now - lastScrollTime < 1000) return;
-      lastScrollTime = now;
-
-      if (e.deltaY > 0 && activeIndex < sections.length - 1) {
-        setActiveIndex((prev) => prev + 1);
-      } else if (e.deltaY < 0 && activeIndex > 0) {
-        setActiveIndex((prev) => prev - 1);
+      if (isMobile) {
+        setBgImage(background.src); // Mobile selalu pakai bg1
+      } else {
+        setBgImage(activeIndex === 0 ? background.src : background2.src); // Tablet ke atas normal
       }
     };
 
-    window.addEventListener("wheel", handleScroll);
-    return () => window.removeEventListener("wheel", handleScroll);
+    checkScreenSize(); // cek pertama kali
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, [activeIndex]);
 
-  const getMotion = (type: string) => {
-    switch (type) {
-      case "zoom":
-        return {
-          initial: { opacity: 0, scale: 0.8 },
-          animate: { opacity: 1, scale: 1 },
-          exit: { opacity: 0, scale: 1.1 },
-        };
-      case "slideRight":
-        return {
-          initial: { opacity: 0, x: 100 },
-          animate: { opacity: 1, x: 0 },
-          exit: { opacity: 0, x: -100 },
-        };
-      case "slideLeft":
-        return {
-          initial: { opacity: 0, x: -100 },
-          animate: { opacity: 1, x: 0 },
-          exit: { opacity: 0, x: 100 },
-        };
-      default:
-        return {
-          initial: { opacity: 0, y: 40, scale: 0.95 },
-          animate: { opacity: 1, y: 0, scale: 1 },
-          exit: { opacity: 0, y: -40, scale: 0.95 },
-        };
+  const goToSection = (index: number) => {
+    setActiveIndex(index);
+
+    // Kalau mobile -> selalu pakai background pertama
+    if (isMobile) {
+      setBgImage(background.src);
+    } else {
+      setBgImage(index === 0 ? background.src : background2.src);
     }
   };
 
+  const handleNavigate = (key: string) => {
+    const index = sections.findIndex((section) => section.key === key);
+    if (index !== -1) goToSection(index);
+  };
+
   const current = sections[activeIndex];
-  const motionProps = getMotion(current.animation);
 
   return (
     <>
-      {/* Navbar dengan prop navigasi */}
-      <div className="z-50 fixed top-0 left-0 right-0">
+      {/* Background global latar belakang semua (paling bawah) */}
+      <div
+        className="fixed inset-0 z-[-10] bg-cover bg-center pb-44"
+        style={{
+          backgroundImage: `url(${latarSemua.src})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
+      />
+
+      {/* Background dinamis yang berubah sesuai activeIndex */}
+      <div
+        className="
+    fixed inset-0 transition-all duration-700 z-0 
+    bg-cover bg-center xl:bg-no-repeat
+  "
+        style={{
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize: bgImage === background2.src ? (window.innerWidth === 1676 && window.innerHeight === 751 ? "80%" : "89%") : "cover",
+        }}
+      />
+
+      {/* Navbar */}
+      <div className="z-50 fixed top-0 left-0 right-0 bg-white/70 backdrop-blur-md shadow-md">
         <Navbar onNavigate={handleNavigate} />
       </div>
 
-      <main className="h-screen w-full overflow-hidden px-2 md:px-12 lg:px-24 pt-16">
-        <div
-          className="md:h-11/12 h-11/12 flex flex-col justify-center items-center rounded-tr-[100] md:rounded-tr-[150px] md:rounded-bl-[150px] overflow-hidden"
-          style={{
-            backgroundImage: `url(${background.src})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          <AnimatePresence mode="wait">
-            <motion.div key={current.key} initial={motionProps.initial} animate={motionProps.animate} exit={motionProps.exit} transition={{ duration: 0.8, ease: [0.25, 0.8, 0.25, 1] }} className="w-full h-full">
-              {current.component}
-            </motion.div>
-          </AnimatePresence>
+      {/* Gradient cuma pas Hero */}
+      {activeIndex === 0 && (
+        <div className="fixed inset-0 z-40 pointer-events-none transition-opacity duration-500">
+          <div className="absolute top-0 w-full h-40 bg-gradient-to-b from-white/90 to-transparent " />
+          <div className="absolute bottom-0 w-full h-40 bg-gradient-to-t from-white/90 to-transparent" />
+        </div>
+      )}
+
+      {/* Main Content */}
+      <main className="relative z-10 md:h-screen h-full w-full  pt-16 pb-12 md:pb-0 ">
+        <div className="relative md:h-11/12 h-11/12 flex flex-col  justify-center items-center ">
+          <div className="relative z-10 w-full h-full ">{current.component}</div>
         </div>
       </main>
 
+      {/* Footer */}
       <div className="fixed bottom-0 left-0 right-0 z-40">
         <Footer />
       </div>

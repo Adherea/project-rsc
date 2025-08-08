@@ -1,13 +1,7 @@
-// app/layout.tsx
-
 import "./globals.css";
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { lato } from "../app/font";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "700"], // sesuaikan
-});
 export const metadata: Metadata = {
   title: "kOTAKi",
   description: "kOTAKi (Komunitas Tumor Otak Indonesia)",
@@ -15,8 +9,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="">
-      <body className={`${poppins.className} bg-gray-50`}>{children}</body>
+    <html lang="en">
+      <body className={`${lato.className} bg-gray-50`}>{children}</body>
     </html>
   );
 }

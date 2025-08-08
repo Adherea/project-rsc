@@ -3,28 +3,36 @@ import logo from "../../public/Assets/image/image.png";
 
 export default function Contact() {
   return (
-    <section id="contact" className="lg:px-28 md:px-10 px-4 lg:bg-center lg:bg-no-repeat xl:bg-[length:100%_100%] pt-14 md:pt-16 lg:pt-20 xl:pt-28 flex justify-center items-center md:rounded-bl-[150px] rounded-bl-4xl">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="text-yellow-300 text-2xl mb-4">Contact Us</h1>
-        <p className="text-white text-justify max-w-3xl leading-relaxed mb-10">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus rem, nobis possimus ad soluta molestiae deleniti facere iste omnis dignissimos dolore facilis exercitationem porro. Quidem tenetur expedita sequi nam suscipit
-          consectetur nesciunt, consequuntur aperiam, deleniti et accusantium, aliquid nihil libero.
-        </p>
+    <section id="contact" className="lg:px-28 md:px-10 px-4 md:pt-48 lg:pt-16 pt-12 text-justify ">
+      <div className="max-w-xl w-full mx-auto bg-opacity-60 rounded-xl p-6 scrollable">
+        <h1 className="text-xl md:text-4xl text-[#000002] mb-6 ">Kontak Kami</h1>
 
-        <div className="text-white leading-8 mb-12">
-          <h2 className="text-yellow-300 text-xl font-semibold mb-2">KOTAKI (Komunitas Tumor Otak Indonesia)</h2>
-          <p>Street Address, Number - Village</p>
-          <p>📩 youremail@email.com</p>
-          <p>📞 +11 012 1234-5678</p>
-        </div>
+        <form action="" className="pt-10 md:pt-0">
+          <div className="mb-4">
+            <label htmlFor="username" className="block font-semibold mb-1 text-sm md:text-base ">
+              USERNAME
+            </label>
+            <input id="username" type="text" placeholder="Masukkan username" className="bg-white py-1 px-2 focus:outline-none focus:ring-2 focus:ring-black w-full" />
+          </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {Array(6)
-            .fill(null)
-            .map((_, i) => (
-              <Image key={i} src={logo} alt={`Logo ${i + 1}`} className="w-full h-auto object-contain" />
-            ))}
-        </div>
+          <div className="mb-4 py-5">
+            <label htmlFor="email" className="block font-semibold mb-1 text-sm md:text-base ">
+              EMAIL
+            </label>
+            <input id="email" type="email" placeholder="Masukkan email" className="bg-white py-1 px-2 focus:outline-none focus:ring-2 focus:ring-black w-full" />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="message" className="block font-semibold mb-1 text-sm md:text-base ">
+              MESSAGE
+            </label>
+            <textarea id="message" placeholder="Tulis pesan Anda..." className="bg-white py-1 px-2 focus:outline-none focus:ring-2 focus:ring-black w-full" rows={4} />
+          </div>
+
+          <div className="flex justify-end">
+            <button className="bg-[#000002] text-white py-2 px-5 rounded-md cursor-pointer">Kirim</button>
+          </div>
+        </form>
       </div>
     </section>
   );

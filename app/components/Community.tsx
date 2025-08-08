@@ -1,29 +1,38 @@
+"use client";
 import Image from "next/image";
-import logo from "../../public/Assets/image/image.png";
+import { useState } from "react";
+import logo from "../../public/Assets/Assets 2-06.png";
+import logos from "../../public/Assets/image/image.png";
 
 export default function Community() {
-  return (
-    <section id="community" className="lg:px-28 md:px-10 px-4 lg:bg-center lg:bg-no-repeat xl:bg-[length:100%_100%] pt-14 md:pt-16 lg:pt-20 xl:pt-28 flex justify-center items-center">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="md:max-w-md md:mx-auto text-center md:text-start text-yellow-300 text-2xl font-extralight mb-6">Our Community</h1>
+  const [isEnglish, setIsEnglish] = useState(false); // 🔥 toggle bahasa
 
-        <div className="lg:h-96 md:h-[800px] overflow-y-auto text-white space-y-6 scrollable">
-          {[...Array(8)].map((_, i) => (
-            <div key={i} className="flex md:flex-row items-center flex-col ">
-              <Image src={logo} className="md:w-1/3 lg:w-1/4 w-10/12" alt={`Community image ${i + 1}`} />
-              <div className="pt-0  px-6">
-                <p className="text-justify">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid ipsa tempore sapiente nihil repudiandae. Incidunt labore, doloremque sequi minima ex eos soluta ad cupiditate cum beatae dolores eaque tempore ipsum,
-                  repellendus, sunt fugiat nulla! Laboriosam eum nihil qui quas harum maxime maiores odit ipsum, ut illo tempore, excepturi cupiditate similique voluptate earum tempora fugiat voluptas atque assumenda distinctio eos
-                  quisquam, beatae rerum ipsa? Maiores veniam unde rerum dignissimos rem. Porro natus nobis libero? Ex officia ipsa aut quam explicabo, quo, rerum soluta, tenetur delectus voluptatem voluptates? Maiores, dignissimos.
-                  <a href="#" className="text-yellow-300 ml-2">
-                    More info
-                  </a>
-                </p>
-              </div>
-            </div>
-          ))}
+  const textID = {
+    title: "Komunitas",
+    desc: "Komunitas Tumor Otak Indonesia (KOTAKI) adalah sebuah inisiatif dari Pokja Neuroonkologi PERDOSNI yang bertujuan menjadi wadah dukungan bagi pasien dan keluarga penyintas tumor otak di Indonesia. Melalui edukasi, advokasi, dan peningkatan kesadaran publik, KOTAKI berperan sebagai jembatan antara komunitas dan tenaga medis untuk mendorong kolaborasi dalam menciptakan layanan kesehatan yang lebih holistik dan berpusat pada pasien.",
+  };
+
+  const textEN = {
+    title: "Community",
+    desc: "The Indonesian Brain Tumor Community (KOTAKI) is an initiative of the Neuro-Oncology Working Group of PERDOSNI that aims to provide support for brain tumor patients and survivors in Indonesia. Through education, advocacy, and public awareness, KOTAKI serves as a bridge between the community and medical professionals to foster collaboration in creating more holistic and patient-centered healthcare services.",
+  };
+
+  const content = isEnglish ? textEN : textID;
+
+  return (
+    <section id="community" className="lg:px-28 md:px-10 px-4 md:pt-48 lg:pt-28 pt-12 text-justify py-20">
+      <div className="max-w-2xl mx-auto scrollable">
+        <div className="">
+          <Image src={logos} alt="" className="max-w-1/4 mx-auto" />
         </div>
+        <h1 className="text-[#000002] text-2xl md:text-4xl mb-4 w-full">{content.title}</h1>
+        <p>{content.desc}</p>
+        <button onClick={() => setIsEnglish(!isEnglish)} className="text-red-500 py-5 underline">
+          {isEnglish ? "indonesia version" : "eng version"}
+        </button>
+        <a href="https://chat.whatsapp.com/JmoHnrZOvie9uzMJh5ItUp" target="_blank" rel="noopener noreferrer">
+          <Image src={logo} alt="WhatsApp Group" className="w-32 cursor-pointer" />
+        </a>
       </div>
     </section>
   );
